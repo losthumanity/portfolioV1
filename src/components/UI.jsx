@@ -38,7 +38,7 @@ const Title = styled.h1`
 const Nav = styled.nav`
   gap: 2rem;
   display: flex;
-  
+
   a {
     font-size: 1.2rem;
     font-weight: bold;
@@ -58,7 +58,7 @@ const ContentPanel = styled.div`
   max-width: 500px;
   backdrop-filter: blur(10px);
   box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
-  
+
   h2 {
     color: #ff00ff;
     border-bottom: 1px solid #333;
@@ -89,7 +89,7 @@ export default function UI() {
       <ContentPanel>
         <h2>Status: ONLINE</h2>
         <p>
-          Welcome to the portfolio. 
+          Welcome to the portfolio.
           <br /><br />
           System integration with Assistant "JOE" is stable.
           <br />

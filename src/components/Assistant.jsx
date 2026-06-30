@@ -1,16 +1,16 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useGLTF, Text } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 
 export default function Assistant({ position = [0, 0, 0] }) {
   const group = useRef();
-  
+
   // Instructions for the user:
   // 1. Generate your 3D model using Tencent Hunyuan3D or similar.
   // 2. Export it as 'joe.glb'.
   // 3. Place it in 'src/assets/models/joe.glb'.
   // 4. Uncomment the lines below to load the model.
-  
+
   // const { scene } = useGLTF('/models/joe.glb'); // Adjust path if in public folder, or import if in src
 
   useFrame((state) => {
@@ -25,17 +25,17 @@ export default function Assistant({ position = [0, 0, 0] }) {
       {/* Placeholder implementation until model is added */}
       <mesh>
         <capsuleGeometry args={[0.5, 2, 4, 8]} />
-        <meshStandardMaterial 
-            color="#00ffff" 
+        <meshStandardMaterial
+            color="#00ffff"
             emissive="#00aaaa"
             emissiveIntensity={0.5}
-            wireframe 
+            wireframe
         />
       </mesh>
-      
-      <Text 
-        position={[0, 1.5, 0]} 
-        fontSize={0.2} 
+
+      <Text
+        position={[0, 1.5, 0]}
+        fontSize={0.2}
         color="#00ffff"
         anchorX="center"
         anchorY="middle"

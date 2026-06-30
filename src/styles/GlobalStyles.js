@@ -1,59 +1,66 @@
 import { createGlobalStyle } from 'styled-components';
 
+// Design tokens — black & white base with a single muted retro-red accent.
+// Metaballs + halftone shader carry the signature visual. Anime-retro feel
+// comes from the Japanese serif headings, monospace labels and film grain.
 const GlobalStyles = createGlobalStyle`
-  body {
+  :root {
+    --bg: #0a0a0a;
+    --bg-soft: #111111;
+    --ink: #f4f1ea;        /* warm paper white */
+    --ink-dim: #9a958c;
+    --line: #2a2a2a;
+    --accent: #c8412a;     /* muted retro red */
+    --accent-soft: rgba(200, 65, 42, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body, #root {
     margin: 0;
     padding: 0;
-    background-color: #050505;
-    color: #0ff;
-    font-family: 'Courier New', Courier, monospace;
-    overflow: hidden;
+    width: 100%;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Scrollbar */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #000;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #0ff;
-    border-radius: 5px;
+  body { overflow-x: hidden; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Shippori Mincho', 'Times New Roman', serif;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
   }
 
-  h1, h2, h3 {
-    text-transform: uppercase;
-    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-  }
+  p { line-height: 1.7; color: var(--ink-dim); }
 
   a {
-    color: #f0f;
+    color: var(--ink);
     text-decoration: none;
-    transition: all 0.3s ease;
-    &:hover {
-      text-shadow: 0 0 10px #f0f;
-    }
+    transition: color 0.25s ease;
+    &:hover { color: var(--accent); }
   }
 
-  #root {
-    width: 100vw;
-    height: 100vh;
-  }
+  ::selection { background: var(--accent); color: var(--bg); }
 
-  /* CRT Scanline Effect Overlay */
-  &::after {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    z-index: 2;
-    background-size: 100% 2px, 3px 100%;
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 0; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* Film-grain overlay — subtle SVG noise so everything feels "real" */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
     pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 `;
 
