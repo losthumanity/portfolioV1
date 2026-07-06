@@ -1,20 +1,16 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import CanvasPlexus from './CanvasPlexus';
-
-const glitch = keyframes`
-  0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(0); }
-  20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); transform: translate(-2px, 2px); }
-  40% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); transform: translate(2px, -2px); }
-  60% { clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%); transform: translate(0); }
-  80% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); transform: translate(2px, 2px); }
-  100% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); transform: translate(0); }
-`;
 
 const Hero = styled.section`
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 0 2rem;
   overflow: hidden;
+
+  @media (max-width: 640px) {
+    padding: 0 1rem;
+  }
 `;
 
 const Backdrop = styled.div`
@@ -46,8 +42,13 @@ const Layout = styled.div`
   gap: 2rem;
   @media (max-width: 860px) {
     grid-template-columns: 1fr;
-    align-items: end;
-    padding-bottom: 6rem;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 8.5rem 0 5.5rem;
+  }
+
+  @media (max-width: 420px) {
+    padding-top: 8rem;
   }
 `;
 
@@ -67,6 +68,16 @@ const Inner = styled.div`
   }
   &::before { top: 4rem; left: -1.5rem; }
   &::after { bottom: -1.5rem; right: -1.5rem; }
+
+  @media (max-width: 860px) {
+    max-width: 100%;
+    padding-top: 0;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
 `;
 
 const Eyebrow = styled.div`
@@ -81,10 +92,20 @@ const Eyebrow = styled.div`
   gap: 0.8rem;
   &::before { content: 'SYS.ID:'; color: var(--ink-dim); letter-spacing: 0.1em; }
   &::after { content: ''; flex: 1; height: 1px; background: repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 4px, transparent 4px, transparent 8px); max-width: 80px; }
+
+  @media (max-width: 520px) {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+
+    &::after { width: 80px; flex: none; }
+  }
 `;
 
 const Title = styled.h1`
-  font-size: clamp(2.8rem, 7vw, 5.4rem);
+  font-size: clamp(2.45rem, 10vw, 5.4rem);
   line-height: 1.02;
   font-weight: 800;
   color: var(--ink);
@@ -102,6 +123,10 @@ const Title = styled.h1`
     border: 1px solid var(--ink-dim);
     box-shadow: inset 0 0 8px rgba(0, 255, 204, 0.2);
   }
+
+  @media (max-width: 420px) {
+    font-size: clamp(2.25rem, 12vw, 3rem);
+  }
 `;
 
 const Sub = styled.p`
@@ -113,12 +138,21 @@ const Sub = styled.p`
   border-left: 2px solid var(--line);
   padding-left: 1rem;
   strong { color: var(--line); font-weight: bold; text-shadow: var(--neon-glow); }
+
+  @media (max-width: 520px) {
+    font-size: 0.9rem;
+    margin-bottom: 1.7rem;
+  }
 `;
 
 const CTA = styled.div`
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+
+  @media (max-width: 420px) {
+    gap: 0.75rem;
+  }
 `;
 
 const Btn = styled.a`
@@ -160,6 +194,13 @@ const Btn = styled.a`
       &::after { content: ' ]'; color: var(--accent); }
     } 
   }
+
+  @media (max-width: 420px) {
+    flex: 1 1 100%;
+    padding: 0.85rem 1rem;
+    text-align: center;
+    font-size: 0.76rem;
+  }
 `;
 
 /* AVATAR COMPONENTS */
@@ -172,9 +213,14 @@ const AvatarStage = styled.div`
   pointer-events: auto;
   transform: translateX(5%);
   @media (max-width: 860px) {
-    width: min(70vw, 300px);
-    margin: 4rem auto 0 auto;
+    width: min(64vw, 280px);
+    min-width: 0;
+    margin: 1rem auto 0;
     transform: none;
+  }
+
+  @media (max-width: 420px) {
+    width: min(76vw, 250px);
   }
 `;
 
@@ -247,6 +293,14 @@ const HUDTextBox = styled.div`
   
   .bold { font-weight: bold; margin-bottom: 2px; }
   .sub { font-size: 0.6rem; opacity: 0.8; }
+
+  @media (max-width: 420px) {
+    width: 45%;
+    font-size: 0.52rem;
+    padding-left: 0.5rem;
+
+    .sub { font-size: 0.48rem; }
+  }
 `;
 
 const AvatarFrame = styled.div`
@@ -294,6 +348,12 @@ const ScrollHint = styled.div`
   gap: 0.6rem;
   .line { width: 1px; height: 30px; background: var(--accent); animation: drop 2s infinite; }
   @keyframes drop { 0% { transform: scaleY(0.3); transform-origin: top; } 50% { transform: scaleY(1); } 100% { transform: scaleY(0.3); transform-origin: bottom; } }
+
+  @media (max-width: 640px) {
+    bottom: 1.25rem;
+    left: 1rem;
+    font-size: 0.6rem;
+  }
 `;
 
 export default function HeroSection() {

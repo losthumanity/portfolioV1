@@ -6,6 +6,10 @@ const Section = styled.section`
   max-width: 1100px;
   margin: 0 auto;
   border-top: 1px solid var(--line);
+
+  @media (max-width: 760px) {
+    padding: 5rem 1rem;
+  }
 `;
 
 const Head = styled.div`
@@ -16,6 +20,19 @@ const Head = styled.div`
   .num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; }
   .label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-dim); }
   .rule { flex: 1; height: 1px; background: var(--line); }
+
+  @media (max-width: 640px) {
+    flex-wrap: wrap;
+    gap: 0.55rem 0.8rem;
+    margin-bottom: 2rem;
+
+    .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.13em;
+    }
+
+    .rule { flex-basis: 100%; }
+  }
 `;
 
 const Intro = styled.div`
@@ -36,6 +53,13 @@ const Intro = styled.div`
     font-size: 1rem;
     margin: 0;
     max-width: 62ch;
+  }
+
+  @media (max-width: 520px) {
+    h2 {
+      font-size: 1.55rem;
+      line-height: 1.18;
+    }
   }
 `;
 
@@ -75,6 +99,16 @@ const Service = styled.article`
     margin: 0 0 1.2rem;
     flex: 1;
   }
+
+  @media (max-width: 520px) {
+    min-height: 0;
+    padding: 1.25rem 1rem;
+
+    h3 {
+      font-size: 1.1rem;
+      line-height: 1.3;
+    }
+  }
 `;
 
 const Chips = styled.div`
@@ -89,6 +123,13 @@ const Chips = styled.div`
     color: var(--ink-dim);
     border: 1px solid var(--line);
     padding: 3px 8px;
+  }
+
+  @media (max-width: 420px) {
+    span {
+      font-size: 0.58rem;
+      letter-spacing: 0.07em;
+    }
   }
 `;
 

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 const Section = styled.section`
   position: relative;
@@ -6,6 +6,10 @@ const Section = styled.section`
   max-width: 1100px;
   margin: 0 auto;
   border-top: 2px dashed var(--line);
+
+  @media (max-width: 760px) {
+    padding: 5rem 1rem 3rem;
+  }
 `;
 
 const Big = styled.h2`
@@ -49,6 +53,24 @@ const Big = styled.h2`
   }
   
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  @media (max-width: 520px) {
+    font-size: clamp(1.75rem, 10vw, 2.45rem);
+    margin-bottom: 2rem;
+
+    a {
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .small {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.45rem;
+      font-size: 0.25em;
+      letter-spacing: 0.16em;
+    }
+  }
 `;
 
 const Links = styled.div`
@@ -56,6 +78,10 @@ const Links = styled.div`
   flex-wrap: wrap;
   gap: 1.5rem;
   max-width: 900px;
+
+  @media (max-width: 520px) {
+    gap: 1rem;
+  }
 `;
 
 const Link = styled.a`
@@ -109,6 +135,15 @@ const Link = styled.a`
     transition: all 0.3s;
     align-self: flex-start;
   }
+
+  @media (max-width: 520px) {
+    flex-basis: 100%;
+    padding: 1.1rem 1rem;
+
+    .value {
+      font-size: 0.88rem;
+    }
+  }
 `;
 
 const Footer = styled.footer`
@@ -127,6 +162,14 @@ const Footer = styled.footer`
   color: var(--ink-dim);
   
   .mark { color: var(--line); text-shadow: var(--neon-glow); }
+
+  @media (max-width: 640px) {
+    align-items: flex-start;
+    flex-direction: column;
+    font-size: 0.64rem;
+    line-height: 1.7;
+    letter-spacing: 0.12em;
+  }
 `;
 
 export default function Contact() {

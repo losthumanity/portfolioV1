@@ -5,6 +5,10 @@ const Section = styled.section`
   position: relative;
   padding: 6rem 0; /* Removing side padding for full-bleed horizontal scroll */
   border-top: 2px dashed var(--line);
+
+  @media (max-width: 760px) {
+    padding: 5rem 0;
+  }
 `;
 
 const Head = styled.div`
@@ -20,6 +24,20 @@ const Head = styled.div`
   .num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; text-shadow: var(--accent-glow); }
   .label { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--line); text-shadow: var(--neon-glow); }
   .rule { flex: 1; height: 1px; background: var(--line); box-shadow: var(--neon-glow); }
+
+  @media (max-width: 640px) {
+    flex-wrap: wrap;
+    gap: 0.55rem 0.8rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+
+    .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+    }
+
+    .rule { flex-basis: 100%; }
+  }
 `;
 
 const TrackContainer = styled.div`
@@ -78,12 +96,18 @@ const HorizontalTrack = styled.div`
   &::-webkit-scrollbar-thumb {
     background: var(--line);
   }
+
+  @media (max-width: 640px) {
+    gap: 1rem;
+    padding: 0.5rem 1rem 2rem;
+    scroll-padding-inline: 1rem;
+  }
 `;
 
 const Card = styled.article`
   flex: 0 0 85%;
   max-width: 500px;
-  min-width: 340px;
+  min-width: 0;
   scroll-snap-align: center;
   border: 1px solid var(--ink-dim);
   background: rgba(5, 5, 5, 0.7);
@@ -111,6 +135,12 @@ const Card = styled.article`
     transform: translateY(-5px); 
     box-shadow: 0 10px 30px rgba(57, 255, 20, 0.15);
   }
+
+  @media (max-width: 640px) {
+    flex-basis: calc(100vw - 2rem);
+    max-width: calc(100vw - 2rem);
+    scroll-snap-align: start;
+  }
 `;
 
 const Watermark = styled.div`
@@ -129,6 +159,11 @@ const Watermark = styled.div`
   ${Card}:hover & {
     -webkit-text-stroke: 1px rgba(57, 255, 20, 0.3);
     text-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+  }
+
+  @media (max-width: 520px) {
+    font-size: 5.5rem;
+    right: -0.6rem;
   }
 `;
 
@@ -188,6 +223,30 @@ const Body = styled.div`
   ${Card}:hover .tag {
     background: var(--line);
     box-shadow: var(--neon-glow);
+  }
+
+  @media (max-width: 520px) {
+    padding: 1.5rem 1rem;
+
+    .num {
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.08rem;
+    }
+
+    p {
+      font-size: 0.84rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.07em;
+    }
   }
 `;
 

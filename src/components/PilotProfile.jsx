@@ -6,6 +6,10 @@ const Section = styled.section`
   max-width: 1200px;
   margin: 0 auto;
   border-top: 2px dashed var(--line);
+
+  @media (max-width: 760px) {
+    padding: 5rem 1rem;
+  }
 `;
 
 const Head = styled.div`
@@ -16,11 +20,27 @@ const Head = styled.div`
   .num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; text-shadow: var(--accent-glow); }
   .label { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--line); text-shadow: var(--neon-glow); }
   .rule { flex: 1; height: 1px; background: var(--line); box-shadow: var(--neon-glow); }
+
+  @media (max-width: 640px) {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.8rem;
+    margin-bottom: 2rem;
+
+    .label {
+      flex: 1 1 calc(100% - 4rem);
+      font-size: 0.72rem;
+      line-height: 1.45;
+      letter-spacing: 0.13em;
+    }
+
+    .rule { flex-basis: 100%; }
+  }
 `;
 
 const HUDGrid = styled.div`
   display: grid;
-  grid-template-columns: minmax(300px, 1fr) minmax(300px, 1.2fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
   gap: 2rem;
   
   @media (max-width: 900px) {
@@ -49,6 +69,10 @@ const Panel = styled.div`
     position: relative;
     z-index: 1;
   }
+
+  @media (max-width: 640px) {
+    padding: 1.25rem;
+  }
 `;
 
 const PanelHeader = styled.h3`
@@ -64,6 +88,13 @@ const PanelHeader = styled.h3`
   padding-bottom: 0.5rem;
   
   &::before { content: 'SYS.DATA // '; color: var(--ink-dim); }
+
+  @media (max-width: 520px) {
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.45;
+    letter-spacing: 0.13em;
+  }
 `;
 
 /* BIO PANEL STYLES */
@@ -76,6 +107,10 @@ const Lead = styled.p`
   text-shadow: 0 0 8px rgba(224, 255, 240, 0.2);
   
   em { color: var(--accent); font-style: normal; text-shadow: var(--accent-glow); }
+
+  @media (max-width: 520px) {
+    font-size: 1rem;
+  }
 `;
 
 const Body = styled.p`
@@ -103,6 +138,18 @@ const StatsGrid = styled.div`
   .n { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; color: var(--ink); font-weight: bold; }
   .n span { color: var(--accent); font-size: 1rem; }
   .l { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+
+    .stat {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px dotted rgba(0, 255, 255, 0.2);
+      padding-bottom: 0.5rem;
+    }
+  }
 `;
 
 /* EXPERIENCE PANEL STYLES */
@@ -137,6 +184,14 @@ const Stack = styled.div`
   .item { display: flex; align-items: baseline; gap: 1rem; }
   .k { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); min-width: 60px; }
   .v { color: var(--line); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+
+  @media (max-width: 520px) {
+    .item {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+  }
 `;
 
 const LogDetails = styled.ul`
@@ -162,7 +217,7 @@ const LogDetails = styled.ul`
 
 export default function PilotProfile() {
   return (
-    <Section id="profile">
+    <Section id="about">
       <Head>
         <span className="num">01_02</span>
         <span className="label">PILOT_PROFILE // SYSTEM_OVERVIEW</span>
