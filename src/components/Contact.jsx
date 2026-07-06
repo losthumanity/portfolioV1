@@ -134,13 +134,13 @@ export default function Contact() {
     <Section id="contact">
       <Big>
         <span className="small">COMM_LINK // ESTABLISHED</span>
-        Initiate project transmission? <a href="mailto:pranavpatil7896@gmail.com">SAY_HELLO_</a>
+        Initiate project transmission? <a href="mailto:pranavpatil.d3v@gmail.com">SAY_HELLO_</a>
       </Big>
 
       <Links>
-        <Link href="mailto:pranavpatil7896@gmail.com">
+        <Link href="mailto:pranavpatil.d3v@gmail.com">
           <span className="label">SECURE_MAIL</span>
-          <span className="value">pranavpatil7896@gmail.com</span>
+          <span className="value">pranavpatil.d3v@gmail.com</span>
         </Link>
         <Link href="https://github.com/losthumanity" target="_blank" rel="noreferrer">
           <span className="label">REPO_UPLINK</span>

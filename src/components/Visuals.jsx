@@ -204,3 +204,24 @@ export function RagArt({ className }) {
     </svg>
   );
 }
+
+// 5) Simple fallback geometric grid
+export function GridArt({ className }) {
+  return (
+    <svg viewBox="0 0 400 300" className={className} role="img" aria-label="Geometric Grid">
+      <defs>
+        <Grain id="grid-grain" opacity={0.15} />
+      </defs>
+      <rect width="400" height="300" fill="#050505" />
+      <g stroke="var(--line)" strokeWidth="1" opacity="0.4">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <line key={`v${i}`} x1={i * 20} y1="0" x2={i * 20} y2="300" />
+        ))}
+        {Array.from({ length: 15 }).map((_, i) => (
+          <line key={`h${i}`} x1="0" y1={i * 20} x2="400" y2={i * 20} />
+        ))}
+      </g>
+      <g filter="url(#grid-grain)"><rect width="400" height="300" fill="transparent" /></g>
+    </svg>
+  );
+}

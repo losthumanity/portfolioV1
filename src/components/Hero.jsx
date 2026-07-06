@@ -1,13 +1,13 @@
 import styled, { keyframes } from 'styled-components';
-import Ramiel from './Ramiel';
+import CanvasPlexus from './CanvasPlexus';
 
 const glitch = keyframes`
-  0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); }
-  20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); }
-  40% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); }
-  60% { clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%); }
-  80% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); }
-  100% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); }
+  0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(0); }
+  20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); transform: translate(-2px, 2px); }
+  40% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); transform: translate(2px, -2px); }
+  60% { clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%); transform: translate(0); }
+  80% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); transform: translate(2px, 2px); }
+  100% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); transform: translate(0); }
 `;
 
 const Hero = styled.section`
@@ -29,8 +29,8 @@ const Fade = styled.div`
   inset: 0;
   z-index: 2;
   background:
-    radial-gradient(circle at 72% 45%, rgba(0, 255, 255, 0.08), transparent 35%),
-    linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.8) 38%, rgba(5,5,5,0.2) 65%, rgba(5,5,5,0.7) 100%);
+    radial-gradient(circle at 72% 45%, rgba(0, 255, 204, 0.05), transparent 45%),
+    linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.8) 38%, rgba(5,5,5,0.2) 65%, rgba(5,5,5,0.8) 100%);
   pointer-events: none;
 `;
 
@@ -57,7 +57,6 @@ const Inner = styled.div`
   max-width: 720px;
   padding-top: 6rem;
   
-  /* Corner crosshairs for the text area */
   &::before, &::after {
     content: '+';
     position: absolute;
@@ -98,10 +97,10 @@ const Title = styled.h1`
     color: var(--ink-dim); 
     font-weight: 500; 
     margin-bottom: 0.6rem; 
-    background: rgba(0, 255, 255, 0.1);
+    background: rgba(0, 255, 204, 0.1);
     padding: 0.2em 0.5em;
     border: 1px solid var(--ink-dim);
-    box-shadow: inset 0 0 8px rgba(0,255,255,0.2);
+    box-shadow: inset 0 0 8px rgba(0, 255, 204, 0.2);
   }
 `;
 
@@ -129,7 +128,7 @@ const Btn = styled.a`
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 0.95rem 1.6rem;
-  background: rgba(57, 255, 20, 0.1);
+  background: rgba(0, 255, 204, 0.1);
   border: 1px solid var(--line);
   color: var(--line);
   transition: all 0.25s ease;
@@ -163,123 +162,121 @@ const Btn = styled.a`
   }
 `;
 
+/* AVATAR COMPONENTS */
 const AvatarStage = styled.div`
   position: relative;
   z-index: 3;
-  min-height: clamp(360px, 66vh, 620px);
-  display: grid;
-  place-items: center;
+  width: min(34vw, 440px);
+  min-width: 320px;
+  aspect-ratio: 1;
   pointer-events: auto;
+  transform: translateX(5%);
   @media (max-width: 860px) {
-    position: absolute;
-    inset: 5rem -10vw auto auto;
-    width: min(62vw, 300px);
-    min-height: 300px;
+    width: min(70vw, 300px);
+    margin: 4rem auto 0 auto;
+    transform: none;
   }
 `;
 
 const AvatarGlow = styled.div`
   position: absolute;
-  width: min(34vw, 460px);
-  aspect-ratio: 1;
+  inset: -20px;
   border-radius: 50%;
-  background:
-    radial-gradient(circle, rgba(0, 255, 255, 0.15), transparent 58%),
-    radial-gradient(circle at 65% 35%, rgba(57, 255, 20, 0.15), transparent 42%);
+  background: radial-gradient(circle, rgba(0, 255, 204, 0.15), transparent 60%);
   filter: blur(24px);
-  transform: translate(7%, -3%);
+`;
+
+const HUDOutline = styled.div`
+  position: absolute;
+  inset: -15px;
+  border: 1px solid rgba(0, 255, 204, 0.3);
+  /* Create the notch on the bottom left for the text box */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 38% 100%, 35% 85%, 0 85%);
+  
+  /* Corner Brackets */
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--line);
+  }
+  
+  /* Top-left bracket */
+  &::before {
+    top: -1px; left: -1px;
+    border-right: none; border-bottom: none;
+  }
+  
+  /* Top-right bracket */
+  &::after {
+    top: -1px; right: -1px;
+    border-left: none; border-bottom: none;
+  }
+`;
+
+const HUDBottomRight = styled.div`
+  position: absolute;
+  bottom: -16px; right: -16px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--line);
+  border-left: none; border-top: none;
+  z-index: 10;
+`;
+
+const HUDTextBox = styled.div`
+  position: absolute;
+  left: -15px;
+  bottom: -15px;
+  height: 15%;
+  width: 36%;
+  border-top: 1px solid rgba(0, 255, 204, 0.3);
+  border-right: 1px solid rgba(0, 255, 204, 0.3);
+  clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0.8rem;
+  
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--line);
+  background: rgba(0, 255, 204, 0.03);
+  
+  .bold { font-weight: bold; margin-bottom: 2px; }
+  .sub { font-size: 0.6rem; opacity: 0.8; }
 `;
 
 const AvatarFrame = styled.div`
-  position: relative;
-  width: min(34vw, 440px);
-  min-width: 320px;
-  aspect-ratio: 1;
-  border: 1px solid var(--ink-dim);
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(0, 255, 204, 0.15);
   background: rgba(5, 5, 5, 0.6);
-  box-shadow:
-    0 0 30px rgba(0, 255, 255, 0.15),
-    inset 0 0 20px rgba(0, 255, 255, 0.2);
+  box-shadow: inset 0 0 20px rgba(0, 255, 204, 0.1);
   overflow: hidden;
-  clip-path: polygon(10% 0, 100% 0, 100% 80%, 90% 100%, 0 100%, 0 20%);
-  transform: translateX(5%);
-  transition: all 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 0 50px rgba(57, 255, 20, 0.3), inset 0 0 30px rgba(57, 255, 20, 0.3);
-    border-color: var(--line);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    background:
-      linear-gradient(rgba(0,255,255,0.05) 50%, rgba(0,0,0,0.15) 50%),
-      radial-gradient(circle at 54% 40%, transparent 0 38%, rgba(5,5,5,0.4) 74%);
-    background-size: 100% 4px, 100% 100%;
-    mix-blend-mode: screen;
-    pointer-events: none;
-  }
-
-  /* Glitch effect layer */
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 5;
-    background: rgba(0, 255, 255, 0.1);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-  }
   
-  &:hover::after {
-    opacity: 1;
-    animation: ${glitch} 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-  }
-
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     display: block;
-    filter: saturate(1.2) contrast(1.2) brightness(0.9) hue-rotate(15deg);
     mix-blend-mode: hard-light;
-  }
-
-  @media (max-width: 860px) {
-    width: 100%;
-    min-width: 0;
-    transform: none;
-  }
-`;
-
-const AvatarCaption = styled.div`
-  position: absolute;
-  right: min(5vw, 3rem);
-  bottom: 8%;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  border-top: 1px solid var(--ink-dim);
-  padding-top: 0.7rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.3rem;
-  
-  &::after {
-    content: 'TARGET: ACQUIRED';
-    color: var(--line);
-    font-size: 0.55rem;
+    filter: contrast(1.1) brightness(0.9);
   }
   
-  @media (max-width: 860px) { display: none; }
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background:
+      linear-gradient(rgba(0, 255, 204, 0.05) 50%, rgba(0, 0, 0, 0.15) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
 `;
 
 const ScrollHint = styled.div`
@@ -302,7 +299,9 @@ const ScrollHint = styled.div`
 export default function HeroSection() {
   return (
     <Hero id="top">
-      <Backdrop><Ramiel /></Backdrop>
+      <Backdrop>
+        <CanvasPlexus />
+      </Backdrop>
       <Fade />
       <Layout>
         <Inner>
@@ -323,10 +322,15 @@ export default function HeroSection() {
         </Inner>
         <AvatarStage>
           <AvatarGlow />
+          <HUDOutline />
+          <HUDBottomRight />
+          <HUDTextBox>
+            <span className="bold">// MEMORY_TRACE</span>
+            <span className="sub">TARGET: ACQUIRED</span>
+          </HUDTextBox>
           <AvatarFrame>
-            <img src="/assets/rei-avatar.jpg" alt="Rei" />
+            <img src="/avatar.png" alt="Rei Outline Profile" />
           </AvatarFrame>
-          <AvatarCaption>SIGNAL_AVATAR // NEON_MEMORY</AvatarCaption>
         </AvatarStage>
       </Layout>
       <ScrollHint><span className="line" /> SCROLL_DOWN</ScrollHint>

@@ -82,12 +82,12 @@ const Group = styled.div`
 
 export default function Skills() {
   const groups = [
-    { title: 'DATA_CLOUD', items: ['Azure', 'Python · Analytics', 'Power BI', 'EDA', 'FAISS'] },
-    { title: 'RAG_RETRIEVAL', items: ['Long-doc indexing', 'Para / topic / page chunking', 'Vector search', 'T5 fine-tuning', 'LangChain'] },
-    { title: 'EXTRACTION', items: ['PyMuPDF', 'pdfplumber', 'EasyOCR', 'Tesseract', 'PaddleOCR-VL 1.6'] },
-    { title: 'VISION_SYS', items: ['YOLO', 'OpenCV graph tracing', 'JSON / Mermaid export', 'PyTorch', 'ResNet50'] },
-    { title: 'NEURAL_AGENTS', items: ['Qwen3 4B · local', 'Small-model hosting', 'Agentic workflows', 'Prompt design', 'Hugging Face'] },
-    { title: 'CORE_ENG', items: ['Docker', 'Git', 'Django / Flask', 'PostgreSQL', 'MongoDB'] },
+    { title: 'CORE_AI_DL', items: ['PyTorch · CNNs', 'ResNet50 Fine-Tuning', 'T5 (Seq2Seq)', 'ROUGE Evaluation', 'PyWavelets'] },
+    { title: 'RAG_RETRIEVAL', items: ['FAISS-GPU', 'Ollama / Llama3', 'Vector Search', 'LangChain', 'Prompt Design'] },
+    { title: 'VISION_SYS', items: ['YOLO Shape Detection', 'OpenCV Graph Tracing', 'Contours & Filtering', 'Digital Forensics (PRNU)'] },
+    { title: 'MLOPS_CLOUD', items: ['AWS SAM / CloudFormation', 'AWS Lambda & RDS', 'Docker / Compose', 'Event-Driven Pipeline', 'GitHub Actions'] },
+    { title: 'ENTERPRISE_ENG', items: ['Java 17 · Spring Boot', 'Spring Cloud Gateway', 'Eureka Service Registry', 'Redis 7 Caching', 'PostgreSQL / MySQL'] },
+    { title: 'DATA_CLOUD', items: ['Python · Pandas', 'Power BI', 'EDA & Feature Eng', 'MongoDB', 'Testcontainers'] }
   ];
 
   return (
