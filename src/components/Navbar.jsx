@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const pulse = keyframes`
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+`;
 
 const Bar = styled.header`
   position: fixed;
@@ -11,9 +16,10 @@ const Bar = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 1.1rem 2rem;
-  background: rgba(10, 10, 10, 0.6);
+  background: rgba(5, 5, 5, 0.8);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 2px solid var(--line);
+  box-shadow: 0 4px 20px rgba(57, 255, 20, 0.15);
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.78rem;
   letter-spacing: 0.12em;
@@ -21,13 +27,24 @@ const Bar = styled.header`
 `;
 
 const Mark = styled.a`
-  font-family: 'Shippori Mincho', serif;
   font-weight: 800;
   font-size: 1.05rem;
-  letter-spacing: 0.02em;
-  text-transform: none;
+  letter-spacing: 0.1em;
   color: var(--ink);
-  span { color: var(--accent); }
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: ${pulse} 2s infinite;
+    box-shadow: var(--accent-glow);
+  }
 `;
 
 const Links = styled.nav`
@@ -36,21 +53,28 @@ const Links = styled.nav`
   a {
     color: var(--ink-dim);
     position: relative;
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: -6px;
-      width: 0; height: 1px;
-      background: var(--accent);
-      transition: width 0.3s ease;
+    padding: 0.3rem 0;
+    
+    &::before { content: '['; opacity: 0; color: var(--line); margin-right: 4px; transition: 0.2s; }
+    &::after { content: ']'; opacity: 0; color: var(--line); margin-left: 4px; transition: 0.2s; }
+    
+    &:hover { 
+      color: var(--line);
+      text-shadow: var(--neon-glow);
+      &::before, &::after { opacity: 1; }
     }
-    &:hover { color: var(--ink); &::after { width: 100%; } }
   }
-  @media (max-width: 640px) { display: none; }
+  @media (max-width: 768px) { display: none; }
 `;
 
-const Time = styled.span`
+const StatusData = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
   color: var(--ink-dim);
+  
+  .sys { color: var(--accent); font-weight: bold; }
+  
   @media (max-width: 640px) { display: none; }
 `;
 
@@ -62,16 +86,17 @@ export default function Navbar() {
       const d = new Date();
       const hh = String(d.getHours()).padStart(2, '0');
       const mm = String(d.getMinutes()).padStart(2, '0');
-      setTime(`${hh}:${mm}`);
+      const ss = String(d.getSeconds()).padStart(2, '0');
+      setTime(`${hh}:${mm}:${ss}`);
     };
     tick();
-    const id = setInterval(tick, 1000 * 30);
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
 
   return (
     <Bar>
-      <Mark href="#top">pranav<span>.</span>patil</Mark>
+      <Mark href="#top">SYS.PORTFOLIO</Mark>
       <Links>
         <a href="#about">about</a>
         <a href="#skills">skills</a>
@@ -79,7 +104,11 @@ export default function Navbar() {
         <a href="#work">work</a>
         <a href="#contact">contact</a>
       </Links>
-      <Time>{time || '00:00'} · same time</Time>
+      <StatusData>
+        <span className="sys">ONLINE</span>
+        <span>T-{time || '00:00:00'}</span>
+        <span>VER.3.0</span>
+      </StatusData>
     </Bar>
   );
 }

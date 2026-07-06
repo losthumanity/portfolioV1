@@ -5,7 +5,7 @@ const Section = styled.section`
   padding: 6rem 2rem;
   max-width: 1100px;
   margin: 0 auto;
-  border-top: 1px solid var(--line);
+  border-top: 2px dashed var(--line);
 `;
 
 const Head = styled.div`
@@ -13,43 +13,88 @@ const Head = styled.div`
   align-items: baseline;
   gap: 1rem;
   margin-bottom: 3rem;
-  .num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; }
-  .label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-dim); }
-  .rule { flex: 1; height: 1px; background: var(--line); }
+  .num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; text-shadow: var(--accent-glow); }
+  .label { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--line); text-shadow: var(--neon-glow); }
+  .rule { flex: 1; height: 1px; background: var(--line); box-shadow: var(--neon-glow); }
 `;
 
 const Groups = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 0;
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
 `;
 
 const Group = styled.div`
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  background: rgba(5, 5, 5, 0.6);
+  border: 1px solid var(--ink-dim);
+  border-top: 3px solid var(--line);
   padding: 1.6rem 1.4rem;
-  h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin: 0 0 1rem; }
-  ul { list-style: none; padding: 0; margin: 0; }
-  li { color: var(--ink); font-size: 0.9rem; padding: 0.35rem 0; font-family: 'JetBrains Mono', monospace; border-bottom: 1px dashed transparent; transition: border-color 0.2s; &:hover { border-color: var(--accent); color: var(--accent); } }
+  position: relative;
+  transition: all 0.3s ease;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(0,255,255,0.05) 50%, rgba(0,0,0,0) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  &:hover {
+    border-color: var(--line);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.15), inset 0 0 20px rgba(57, 255, 20, 0.05);
+  }
+
+  h4 { 
+    font-family: 'JetBrains Mono', monospace; 
+    font-size: 0.8rem; 
+    letter-spacing: 0.1em; 
+    text-transform: uppercase; 
+    color: var(--accent); 
+    margin: 0 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    
+    &::before { content: 'SYS.MOD // '; color: var(--ink-dim); }
+  }
+  ul { list-style: none; padding: 0; margin: 0; position: relative; z-index: 2; }
+  li { 
+    color: var(--ink); 
+    font-size: 0.85rem; 
+    padding: 0.4rem 0; 
+    font-family: 'JetBrains Mono', monospace; 
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px dotted rgba(0, 255, 255, 0.2);
+    
+    &::before {
+      content: '[OK]';
+      color: var(--line);
+      font-size: 0.75rem;
+    }
+    
+    &:hover { color: var(--accent); &::before { color: var(--accent); content: '[>>]'; } } 
+  }
 `;
 
 export default function Skills() {
   const groups = [
-    { title: 'Data & Cloud', items: ['Azure', 'Python · Analytics', 'Power BI', 'EDA', 'FAISS'] },
-    { title: 'RAG / Retrieval', items: ['Long-doc indexing', 'Para / topic / page chunking', 'Vector search', 'T5 fine-tuning', 'LangChain'] },
-    { title: 'Extraction', items: ['PyMuPDF', 'pdfplumber', 'EasyOCR', 'Tesseract', 'PaddleOCR-VL 1.6'] },
-    { title: 'Computer Vision', items: ['YOLO', 'OpenCV graph tracing', 'JSON / Mermaid export', 'PyTorch', 'ResNet50'] },
-    { title: 'LLMs / Agents', items: ['Qwen3 4B · local', 'Small-model hosting', 'Agentic workflows', 'Prompt design', 'Hugging Face'] },
-    { title: 'Engineering', items: ['Docker', 'Git', 'Django / Flask', 'PostgreSQL', 'MongoDB'] },
+    { title: 'DATA_CLOUD', items: ['Azure', 'Python · Analytics', 'Power BI', 'EDA', 'FAISS'] },
+    { title: 'RAG_RETRIEVAL', items: ['Long-doc indexing', 'Para / topic / page chunking', 'Vector search', 'T5 fine-tuning', 'LangChain'] },
+    { title: 'EXTRACTION', items: ['PyMuPDF', 'pdfplumber', 'EasyOCR', 'Tesseract', 'PaddleOCR-VL 1.6'] },
+    { title: 'VISION_SYS', items: ['YOLO', 'OpenCV graph tracing', 'JSON / Mermaid export', 'PyTorch', 'ResNet50'] },
+    { title: 'NEURAL_AGENTS', items: ['Qwen3 4B · local', 'Small-model hosting', 'Agentic workflows', 'Prompt design', 'Hugging Face'] },
+    { title: 'CORE_ENG', items: ['Docker', 'Git', 'Django / Flask', 'PostgreSQL', 'MongoDB'] },
   ];
 
   return (
     <Section id="skills">
       <Head>
         <span className="num">03</span>
-        <span className="label">Skills</span>
+        <span className="label">SKILL_MODULES</span>
         <span className="rule" />
       </Head>
       <Groups>
